@@ -1,0 +1,33 @@
+<div *ngIf="artistInfo" class="feature-artist">
+    <img [src]="artistInfo.artist.image[4]['#text']" alt="">
+    <div class="info">
+      <h2>{{artistInfo.artist.name}}</h2>
+      <div>
+        <span class="tag" *ngFor="let tag of artistInfo.artist.tags.tag">{{tag.name}} </span>
+      </div>
+      <p class="summary" [innerHTML] = 'artistInfo.artist.bio.summary'></p>
+      <button (click)="searchTop(artistInfo.artist.name)">Search tabs!</button>
+    </div>
+</div>
+
+<div class="charts-wrap">
+    <div *ngIf="topTracks.length > 0" class="chart-list">
+        <h2>TOP TRACKS</h2>
+        <div class="chart-list-item" *ngFor="let track of topTracks" (click)="searchTop(track.name)">
+          <p>{{track.name}} - {{track.artist.name}}</p>
+          <div>{{track.playcount}} <i class="icon-headphones"></i></div>
+        </div>
+      </div>
+      
+    <div *ngIf="topArtist.length > 0" class="chart-list">
+          <h2>TOP ARTIST</h2>
+          <div class="chart-list-item" 
+               *ngFor="let artist of topArtist" 
+               (click)="getArtistInfo(artist.name)" 
+          >
+            <p>{{artist.name}}</p>
+            <div>{{artist.playcount}} <i class="icon-headphones"></i></div>
+          </div>
+    </div>
+</div>
+

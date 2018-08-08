@@ -1,0 +1,13 @@
+<h1>Search results</h1>
+<div class="search-wrapper">
+
+  <div class="chord" *ngFor="let chord of searchResult" (click)="getSingleChord(chord.url)">
+        <p>{{chord.name}}</p>
+        <p><span stop-propagation (click)="searchTop(chord.artist)">{{chord.artist}}</span></p>
+        <div class="rat"><span [innerHTML] = 'chord.rating | rattingPipe'></span> - {{chord.numberRates}} votes</div>
+        <div class="fav" stop-propagation *ngIf="!isFavourite(chord.url)" (click)="addFavourite(chord.url)"> <i class="icon-heart isNotFavourite"></i></div>
+        <div class="fav" stop-propagation *ngIf="isFavourite(chord.url)" (click)="deleteFavourite(chord.url)"><i class="icon-heart isFavourite"></i></div>
+      </div>
+</div>
+
+  <button id="more-results" *ngIf='searchResult.length > 1' (click)="searchMore(prevQuery)">More results</button>

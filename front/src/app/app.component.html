@@ -1,0 +1,54 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<header>
+  <div class="inner">
+    <nav>
+      <ul>
+        <li>
+          <a [routerLink]="['/home']">Home</a>
+        </li>
+        <li>
+          <a [routerLink]="['/tuner']">Tuner</a>
+        </li>
+        <li>
+          <a [routerLink]="['/charts']">Top Charts</a>
+        </li>
+      </ul>
+    </nav>
+    <form action="">
+      <input id="nav_search" autocomplete="off" type="text" name="search" [(ngModel)]="query" (ngModelChange)="getSearchSuggestions(query)">
+      <i (click)="searchTop(query)" class="icon-search"></i>
+      <div id="search-suggestions" class="select">
+        <div *ngFor="let suggest of suggestions" class="option">{{suggest}}</div>
+      </div>
+    </form>
+    <div *ngIf="sessionService.user" class="profile">
+      <i class="icon-user"></i>
+      <span *ngIf="sessionService.user"> {{ sessionService.user.username }}</span>
+      <ul class="menu_profile hidden">
+        <li *ngIf="sessionService.user">
+          <a href="#" [routerLink]="['/favourites']">My favourites</a>
+        </li>
+        <li *ngIf="sessionService.user">
+          <a href="#" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="!sessionService.user" class="profile no-logged">
+      <ul>
+          <li *ngIf="!sessionService.user">
+              <a [routerLink]="['/signup']">Signup</a>
+            </li>
+            <li *ngIf="!sessionService.user">
+              <a [routerLink]="['/login']">Login</a>
+            </li>
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+<main>
+  
+  <router-outlet></router-outlet>
+
+</main>

@@ -1,0 +1,12 @@
+<h2 *ngIf="SessionService.user">{{ SessionService.user.username }} favourites</h2>
+
+<div class="search-wrapper">
+
+  <div class="chord" *ngFor="let favourite of userFavourites" (click)="getSingleChord(favourite.url)">
+        <p>{{favourite.name}}</p>
+        <p stop-propagation (click)="searchTop(favourite.artist)">{{favourite.artist}}</p>
+        <div class="rat"><span [innerHTML] = 'favourite.rating | rattingPipe'></span> - {{favourite.numberRates}} votes</div>
+        <div class="fav" stop-propagation (click)="deleteFavourite(favourite)"><i class="icon-heart-broken isFavourite"></i></div>
+      </div>
+</div>
+

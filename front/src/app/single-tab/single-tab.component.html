@@ -1,0 +1,80 @@
+<div class="chord-main-wrap">
+  
+  <section>
+    <div class="utils">
+      <div class="inner">
+        <div class="utility-wrap">
+          <button id="autoscroll">Autoscroll</button> 
+          <img src="./assets/img/_icon-arrow-down.png">
+          <p>Speed down</p>
+          <img src="./assets/img/_icon-arrow-up.png">
+          <p>Speed up</p>
+          <img class="space" src="./assets/img/_icon-space.png" width="65px">
+          <p>
+            Window up
+          </p>
+        </div>
+        <div (click)="toggleTunner()" id="showTunner" class="utility-wrap">
+          <button *ngIf="!showTuner">Show Tuner</button>
+          <button *ngIf="showTuner">Hide tuner</button>
+        </div>
+        <div class="utility-wrap">
+          <button id="trasposeUp">Traspose +1</button>
+          <button id="trasposeDown">Trapose -1</button>
+        </div>
+      </div>
+    </div>
+    <div class="artist" *ngIf="chord">
+      <h1>{{chord.name}}</h1>
+      <h3>{{chord.artist}}</h3>
+      <div class="more-info" (click)="getArtistInfo(chord.artist)">More info</div>
+      <div *ngIf="artistInfo" class="feature-artist">
+        <img [src]="artistInfo.artist.image[2]['#text']" alt="">
+        <div class="info">
+          <h3>{{chord.artist}}</h3>
+          <div>
+            <span class="tag" *ngFor="let tag of artistInfo.artist.tags.tag">{{tag.name}} </span>
+          </div>
+          <p class="summary" [innerHTML] = 'artistInfo.artist.bio.summary'></p>
+          <button (click)="searchTop(artistInfo.artist.name)">Search tabs</button>
+        </div>
+      </div>
+      
+      <div *ngIf="!isFavourite(chord.url)" (click)="addFavourite(chord.url)"><i class="icon-heart isNotFavourite"></i></div>
+      <div *ngIf="isFavourite(chord.url)" (click)="deleteFavourite(chord.url)"><i class="icon-heart isFavourite"></i></div>
+    </div>
+
+    <app-chord-content *ngIf="chord.content" [chord]="chord.content.text"></app-chord-content>
+  </section>
+  <aside>
+    
+    <div class="versions">
+      <h4>Versions</h4>
+      <ul *ngIf="versions.length > 0">
+        <li *ngFor="let version of versions, let i = index" (click)="getSingleChord(version.url)">
+          <p>V. {{i+1}}
+          <span [innerHTML]="version.rating | rattingPipe"></span>
+          - {{version.numberRates}} votes
+          </p>
+        </li>
+      </ul>
+    </div>
+    
+    
+    <div *ngIf="recomended.length > 0" class="recomended">
+      <h4>Recomended</h4>
+      <ul *ngIf="recomended.length > 0">
+        <li *ngFor="let recomendedItem of recomended" (click)="getSingleChord(recomendedItem.url)">
+          <p>{{recomendedItem.name}} - {{recomendedItem.artist}}</p>
+        </li>
+      </ul>
+    </div>
+
+  </aside>
+
+</div>
+
+<div id="tuner-mask" (click)="toggleTunner()">
+  <app-tuner *ngIf="showTuner"></app-tuner>
+  <i class="icon-cross"></i>
+</div>

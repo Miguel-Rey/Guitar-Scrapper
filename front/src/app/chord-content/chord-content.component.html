@@ -1,0 +1,13 @@
+<pre class="chord-content" *ngIf="chord"  [innerHTML]= 'chord | chordify'></pre>
+<div class="chord-popup">
+  <div class="icon-holder">
+    <i class="icon-cross" (click)="hideChord()"></i>
+    <div class="arrows">
+      <i class="icon-arrow-left" (click)="previousChord()"></i>
+      <i class="icon-arrow-right" (click)="nextChord()"></i>
+    </div>
+  </div>
+  <div class="images">
+    <img *ngFor="let image of popupImages" [src]=image  onError="this.src='../../assets/img/placeholder.png'">
+  </div> 
+</div>

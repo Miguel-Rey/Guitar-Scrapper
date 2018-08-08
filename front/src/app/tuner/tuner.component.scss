@@ -1,0 +1,10 @@
+  .tuner-wrap{
+    height: calc(100vh - 64px);
+    display: flex;
+    iframe{
+      margin: auto;
+      width: 600px;
+      height: 544px;
+      border:none;
+    }
+  }

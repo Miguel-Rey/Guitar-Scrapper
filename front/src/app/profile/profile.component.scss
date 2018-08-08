@@ -1,0 +1,112 @@
+.search-wrapper{
+  display: flex;
+  flex-direction: column;
+  .chord{
+    display: flex;
+    background-color: #ededed;
+    padding: 0 1em;
+    margin: 0.25em 0;
+    box-shadow: 0px 1px 3px rgba(0,0,0,.15);
+    p:hover{
+      text-decoration: underline;
+    }
+    &:hover{
+      background-color: #ffa71a;
+      color: #fff;
+      transition: background-color 100ms ease-in-out, color 100ms ease-in-out;
+      cursor: pointer;
+      .rat{
+        & > span{
+          transition: color 100ms ease-in-out;
+          color: #fff;
+        }
+      }
+    }
+    > * {
+      width: 30%;
+      text-align: left;
+    }
+    .fav{
+      width: 10%;
+      text-align: right;
+      i{
+        font-size: 1.5em;
+        line-height: 200%;
+        &.isFavourite{
+          color: #ff871c;
+          &:hover{
+            color: #999;
+          }
+        }
+        &.isNotFavourite{
+          color: #999;
+          &:hover{
+            color: #ff871c;
+          }
+        }
+      }
+    }
+    .rat{
+      display: flex;
+      align-items: center;
+      & > span{
+        color: #ff871c;
+        font-size: 1.5em;
+      }
+    }
+  }
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../../assets/icons/icomoon.eot?4xq7i9');
+  src:  url('../../assets/icons/icomoon.eot?4xq7i9#iefix') format('embedded-opentype'),
+    url('../../assets/icons/icomoon.ttf?4xq7i9') format('truetype'),
+    url('../../assets/icons/icomoon.woff?4xq7i9') format('woff'),
+    url('../../assets/icons/icomoon.svg?4xq7i9#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-headphones:before {
+  content: "\e910";
+}
+.icon-music:before {
+  content: "\e911";
+}
+.icon-user:before {
+  content: "\e971";
+}
+.icon-search:before {
+  content: "\e986";
+}
+.icon-star-empty:before {
+  content: "\e9d7";
+}
+.icon-star-half:before {
+  content: "\e9d8";
+}
+.icon-star-full:before {
+  content: "\e9d9";
+}
+.icon-heart:before {
+  content: "\e9da";
+}
+.icon-heart-broken:before {
+  content: "\e9db";
+}
