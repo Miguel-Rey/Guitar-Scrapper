@@ -1,6 +1,6 @@
 <h1>Your country's popular tracks</h1>
 
-<div class="tracks">
+<div class="tracks" *ngIf="topGeo.length > 0">
   <div *ngFor="let track of topGeo" class="feature-artist">
     <img [src]="track.image[3]['#text']" alt="">
     <div class="info">
@@ -11,9 +11,15 @@
   </div>
 </div>
 
+<div class="tracks" *ngIf="topGeo.length <= 0">
+  <div class="loader-wrap">
+    <div class="loader"></div>
+  </div>
+</div>
+
 <h1>World popular tracks </h1>
 
-<div class="tracks">
+<div class="tracks" *ngIf="topTracks.length > 0">
   <div *ngFor="let track of topTracks" class="feature-artist">
     <img [src]="track.image[3]['#text']" alt="">
     <div class="info">
@@ -24,9 +30,15 @@
   </div>
 </div>
 
+<div class="tracks" *ngIf="topTracks.length <= 0">
+    <div class="loader-wrap">
+      <div class="loader"></div>
+    </div>
+  </div>
+
 <h1>World popular artists</h1>
 
-<div class="tracks">
+<div class="tracks" *ngIf="topArtist.length > 0">
   <div *ngFor="let artist of topArtist" class="feature-artist">
     <img [src]="artist.image[3]['#text']" alt="">
     <div class="info">
@@ -35,3 +47,9 @@
     </div>
   </div>
 </div>
+
+<div class="tracks" *ngIf="topArtist.length <= 0">
+    <div class="loader-wrap">
+      <div class="loader"></div>
+    </div>
+  </div>

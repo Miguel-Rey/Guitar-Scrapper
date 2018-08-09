@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 })
 export class ProfileComponent implements OnInit {
 
-  userFavourites;
+  userFavourites = [];
 
   constructor(
     private SessionService: SessionService,

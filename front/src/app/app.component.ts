@@ -45,7 +45,6 @@ export class AppComponent {
         this.selectedSuggestion++
         let options = this.elRef.nativeElement.querySelectorAll('.option')
         if(options.length > 0){
-          console.log(options);
           options.forEach(e => {
             e.classList.remove('selected')
           })
@@ -75,11 +74,21 @@ export class AppComponent {
     );
   }
 
+  setOptionEvent(){
+    let options = this.elRef.nativeElement.querySelectorAll('.option');
+    options.forEach(e => {
+      e.addEventListener('click', ()=>{
+        this.searchTop(e.innerText);
+      })
+    })
+  }
+
   getSearchSuggestions(query) {
     if (query.length > 3) {
       this.ChordsService.getSuggestions(query).subscribe(data => {
         this.suggestions = data;
         document.getElementById('search-suggestions').classList.add('show');
+        this.setOptionEvent();
       });
     } else {
       this.suggestions = null;

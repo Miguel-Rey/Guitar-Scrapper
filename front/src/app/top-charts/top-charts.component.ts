@@ -40,6 +40,7 @@ export class TopChartsComponent implements OnInit {
   }
 
   getArtistInfo(artist){
+    this.artistInfo = null;
     this.LastFMService.getArtistInfo(artist).subscribe( data => {
       this.artistInfo = data
     })

@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Chord = require('../models/Chords');
 
-mongoose.connect(process.env.DBURL).then( () =>  console.log('connected to DB'));
+mongoose.connect('mongodb://guitar-user:my-guitar-pass-1@ds217092.mlab.com:17092/guitarscraper').then( () =>  console.log('connected to DB'));
 
 function specificNote(note, sufix, times){
     let imageArray = []

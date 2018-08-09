@@ -9,6 +9,9 @@
       <button (click)="searchTop(artistInfo.artist.name)">Search tabs!</button>
     </div>
 </div>
+<div *ngIf="!artistInfo" style="height: 300px;" class="feature-artist loader-wrap">
+  <div class="loader"></div>
+</div>
 
 <div class="charts-wrap">
     <div *ngIf="topTracks.length > 0" class="chart-list">
@@ -17,7 +20,13 @@
           <p>{{track.name}} - {{track.artist.name}}</p>
           <div>{{track.playcount}} <i class="icon-headphones"></i></div>
         </div>
-      </div>
+    </div>
+    <div *ngIf="topTracks.length <= 0" class="chart-list">
+        <h2>TOP TRACKS</h2>
+        <div class="loader-wrap">
+          <div class="loader"></div>
+        </div>
+    </div>
       
     <div *ngIf="topArtist.length > 0" class="chart-list">
           <h2>TOP ARTIST</h2>
@@ -28,6 +37,12 @@
             <p>{{artist.name}}</p>
             <div>{{artist.playcount}} <i class="icon-headphones"></i></div>
           </div>
+    </div>
+    <div *ngIf="topArtist.length <= 0" class="chart-list">
+        <h2>TOP ARTIST</h2>
+        <div class="loader-wrap">
+          <div class="loader"></div>
+        </div>
     </div>
 </div>
 

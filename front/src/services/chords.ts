@@ -31,6 +31,15 @@ export class ChordsService {
     )
   }
 
+  searchRecomended(query, page){
+    return this.http.post(`${BASEURL}/api/chords`,{query, page, 'recomended': true}, this.options).pipe(
+      map ( (res:Response) => {
+        return res.json();
+      }),
+      catchError( e => {console.log('Error', query, page); return of(e)})
+    )
+  }
+
   getChordByUrl(url){
     return this.http.post(`${BASEURL}/api/chords/single`,{url}, this.options).pipe(
       map ( (res: Response) => {

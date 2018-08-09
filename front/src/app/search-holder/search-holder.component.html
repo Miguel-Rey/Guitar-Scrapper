@@ -1,5 +1,5 @@
 <h1>Search results</h1>
-<div class="search-wrapper">
+<div *ngIf="searchResult.length > 0" class="search-wrapper">
 
   <div class="chord" *ngFor="let chord of searchResult" (click)="getSingleChord(chord.url)">
         <p>{{chord.name}}</p>
@@ -10,4 +10,9 @@
       </div>
 </div>
 
-  <button id="more-results" *ngIf='searchResult.length > 1' (click)="searchMore(prevQuery)">More results</button>
+<div *ngIf="searchResult.length <= 0" class="search-wrapper">
+  <div class="loader-wrap">
+    <div class="loader"></div>
+  </div>
+</div>
+<button id="more-results" *ngIf='searchResult.length > 1' (click)="searchMore(prevQuery)">More results</button>

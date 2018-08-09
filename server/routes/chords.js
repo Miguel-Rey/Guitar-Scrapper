@@ -9,6 +9,7 @@ const axios = require('axios');
 
 function checkSrc(url){
   let sanitisedUrl = `${process.env.FRONTURL}/${url.slice(6)}.gif`
+  console.log(sanitisedUrl)
   let response;
   return axios.get(sanitisedUrl)
   .then(data =>{
@@ -23,11 +24,15 @@ router.get('/chordimage/:id', (req, res, next) => {
   const id = req.params.id.replace('___','♯');
   Chord.findOne({completeName: id})
     .then( chord => {
-      Promise.all(chord.images.map(e => {
-        return checkSrc(e);
-      })).then( data => {
-        res.status(200).json(data.filter(e => e));
-      })
+      if(chord){
+        Promise.all(chord.images.map(e => {
+          return checkSrc(e);
+        })).then( data => {
+          res.status(200).json(data.filter(e => e));
+        })
+      } else {
+        res.status(200).json({message: 'No chords found'});
+      }
     })
     .catch(e => console.log(e))
 })
@@ -35,17 +40,34 @@ router.get('/chordimage/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const query = req.body.query ;
   const page = parseInt(req.body.page);
-  ugs.search({
-    query: query,
-    page: page,
-    type: ['Chords']
-  }, (error, tabs) => {
-    if (error) {
-      res.status(404).json(error);
-    } else {
-      res.status(200).json(tabs);
-    }
-  })
+  const recomended = req.body.recomended;
+  if(!recomended){
+    ugs.search({
+      query: query,
+      page: page,
+      type: ['Chords']
+    }, (error, tabs) => {
+      if (error) {
+        console.log(error);
+        res.status(404).json(error);
+      } else {
+        res.status(200).json(tabs);
+      }
+    })
+  } else {
+    ugs.search({
+      query: query,
+      page: page,
+      type: ['Chords']
+    }, (error, tabs) => {
+      if (error) {
+        console.log(error);
+        res.status(200).json(error);
+      } else {
+        res.status(200).json(tabs);
+      }
+    })
+  }
 })
 
 router.post('/single', (req, res, next) => {

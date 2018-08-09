@@ -8,10 +8,10 @@ import { ChordsImageService } from '../../services/chordImage';
 })
 export class ChordContentComponent implements OnChanges {
   @Input() chord: any;
-  isScrollActivated = true;
+  isScrollActivated = false;
   intervalID;
   scrollConfig = {
-    interval: 10
+    interval: 50
   }
   showTuner = false;
   popupImages = [];
@@ -57,18 +57,22 @@ export class ChordContentComponent implements OnChanges {
       this.traposeChordsDown();  
     })
     document.getElementById('autoscroll').addEventListener('click', ()=>{
-      this.scrollTo();   
+      if(this.isScrollActivated){
+        this.stopScroll();
+      } else {
+        this.scrollTo();   
+      }
     })
     document.addEventListener('keydown', function(e){
-      if(e.keyCode == 40){
+      if(e.keyCode == 40 && ChordComponent.isScrollActivated){
         e.preventDefault();
         ChordComponent.speedDownScroll()
       }
-      if(e.keyCode == 38){
+      if(e.keyCode == 38 && ChordComponent.isScrollActivated){
         e.preventDefault();
         ChordComponent.speedUpScroll()
       }
-      if(e.keyCode == 32){
+      if(e.keyCode == 32 && ChordComponent.isScrollActivated){
         e.preventDefault();
         ChordComponent.moveWindowUp();
       }
@@ -157,25 +161,27 @@ export class ChordContentComponent implements OnChanges {
   }
 
   scrollTo() {
+    document.getElementById('autoscroll').innerText="Stop scroll"
+    this.isScrollActivated = true;
     this.intervalID = setInterval(() => this.scrollInterval(), this.scrollConfig.interval);
   }
 
   scrollInterval(){
     document.documentElement.scrollTop += 1;
-    if(window.innerHeight + window.scrollY > document.body.offsetHeight){
-      clearInterval(this.intervalID);
+    if(window.innerHeight + window.scrollY + 20 > document.body.offsetHeight){
+      this.stopScroll()
     }
   }
 
   speedUpScroll(){
     clearInterval(this.intervalID);
-    this.scrollConfig.interval--
+    this.scrollConfig.interval-= 5;
     this.scrollTo();
   }
 
   speedDownScroll(){
     clearInterval(this.intervalID);
-    this.scrollConfig.interval++
+    this.scrollConfig.interval+= 5;
     this.scrollTo();
   }
 
@@ -188,7 +194,9 @@ export class ChordContentComponent implements OnChanges {
   }
 
   stopScroll(){
+    document.getElementById('autoscroll').innerText="Autoscroll"
     this.isScrollActivated = false;
+    clearInterval(this.intervalID);
   }
 
   getChordImages(note) {

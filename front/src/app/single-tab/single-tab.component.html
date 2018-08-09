@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class="artist" *ngIf="chord">
+    <div class="artist" *ngIf="chord.name">
       <h1>{{chord.name}}</h1>
       <h3>{{chord.artist}}</h3>
       <div class="more-info" (click)="getArtistInfo(chord.artist)">More info</div>
@@ -43,8 +43,13 @@
       <div *ngIf="!isFavourite(chord.url)" (click)="addFavourite(chord.url)"><i class="icon-heart isNotFavourite"></i></div>
       <div *ngIf="isFavourite(chord.url)" (click)="deleteFavourite(chord.url)"><i class="icon-heart isFavourite"></i></div>
     </div>
-
+    
     <app-chord-content *ngIf="chord.content" [chord]="chord.content.text"></app-chord-content>
+    <div class="artist" *ngIf="!chord.content">
+        <div class="loader-wrap">
+          <div class="loader"></div>
+        </div>
+    </div>
   </section>
   <aside>
     

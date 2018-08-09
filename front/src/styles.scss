@@ -176,3 +176,53 @@ pre{
 .icon-arrow-left:before {
   content: "\ea38";
 }
+
+
+//spinner
+.loader-wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader{
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+.loader:before, .loader:after{
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 7px solid transparent;
+  border-top-color: #fb9f28;
+  margin: 0 auto;
+}
+
+.loader:before{
+  z-index: 100;
+  animation: spin 1s infinite;
+}
+
+.loader:after{
+  border: 7px solid #b7b7b7;
+}
+
+@keyframes spin{
+  0%{
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100%{
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
