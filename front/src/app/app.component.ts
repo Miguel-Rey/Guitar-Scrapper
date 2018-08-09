@@ -2,7 +2,7 @@ import { Component, ElementRef } from "@angular/core";
 import { SessionService } from "../services/session";
 import { ChordsService } from "../services/chords";
 import { Router } from "@angular/router";
-import { isNull } from "../../node_modules/@angular/compiler/src/output/output_ast";
+import { isNull } from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: "app-root",

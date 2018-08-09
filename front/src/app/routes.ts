@@ -7,15 +7,16 @@ import { ProfileComponent } from './profile/profile.component';
 import { SearchHolderComponent } from './search-holder/search-holder.component';
 import { TunerComponent } from './tuner/tuner.component';
 import { TopChartsComponent } from './top-charts/top-charts.component';
+import { IsLoggedGuardService } from '../services/enter-details-guard.service';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path:'signup', component:SignupComponent},
   { path:'login', component:LoginComponent},
-  { path: 'home', component: HomeComponent},
-  { path: 'single/:id', component: SingleTabComponent},
-  { path: 'favourites', component: ProfileComponent},
-  { path: 'search/:query', component: SearchHolderComponent},
-  { path: 'tuner', component: TunerComponent},
-  { path: 'charts', component: TopChartsComponent}
+  { path: 'home', component: HomeComponent, canActivate: [IsLoggedGuardService]},
+  { path: 'single/:id', component: SingleTabComponent, canActivate: [IsLoggedGuardService]},
+  { path: 'favourites', component: ProfileComponent, canActivate: [IsLoggedGuardService]},
+  { path: 'search/:query', component: SearchHolderComponent, canActivate: [IsLoggedGuardService]},
+  { path: 'tuner', component: TunerComponent, canActivate: [IsLoggedGuardService]},
+  { path: 'charts', component: TopChartsComponent, canActivate: [IsLoggedGuardService]}
 ];

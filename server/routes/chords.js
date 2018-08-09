@@ -41,15 +41,15 @@ router.post('/', (req, res, next) => {
   const query = req.body.query ;
   const page = parseInt(req.body.page);
   const recomended = req.body.recomended;
-  if(!recomended){
+  const more = req.body.more;
+  if(recomended || more){
     ugs.search({
       query: query,
       page: page,
       type: ['Chords']
     }, (error, tabs) => {
       if (error) {
-        console.log(error);
-        res.status(404).json(error);
+        res.status(200).json(error);
       } else {
         res.status(200).json(tabs);
       }
@@ -62,7 +62,7 @@ router.post('/', (req, res, next) => {
     }, (error, tabs) => {
       if (error) {
         console.log(error);
-        res.status(200).json(error);
+        res.status(404).json(error);
       } else {
         res.status(200).json(tabs);
       }

@@ -68,8 +68,8 @@ export class SearchHolderComponent implements OnInit {
   }
 
   searchMore(query: string) {
-    this.ChordsService.searchChords(query, this.page).subscribe(data => {
-      if(data.status === 404){
+    this.ChordsService.searchMore(query, this.page).subscribe(data => {
+      if(data.status === 404 || Object.keys(data).length === 0){
         document.getElementById('more-results').innerText = 'No more results!'
         document.getElementById('more-results').setAttribute('disabled','true');
       } else {

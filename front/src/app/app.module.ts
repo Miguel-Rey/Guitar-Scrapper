@@ -22,6 +22,7 @@ import { TunerComponent } from './tuner/tuner.component';
 import { TopChartsComponent } from './top-charts/top-charts.component';
 import { RattingPipe } from './pipes/ratting.pipe';
 import { StopPropagationDirective } from './directives/stop-propagation.directive';
+import { IsLoggedGuardService } from '../services/enter-details-guard.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { StopPropagationDirective } from './directives/stop-propagation.directiv
     FormsModule,
     HttpModule
   ],
-  providers: [SessionService, ChordsService, ChordsImageService, LastFMService],
+  providers: [SessionService, ChordsService, ChordsImageService, LastFMService, IsLoggedGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
