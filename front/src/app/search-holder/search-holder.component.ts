@@ -17,6 +17,7 @@ export class SearchHolderComponent implements OnInit {
   page: number;
   prevQuery: string;
   userFavourites: Array<string>;
+  isLoadingMore =  false;
 
   constructor(
     private SessionService: SessionService,
@@ -68,6 +69,7 @@ export class SearchHolderComponent implements OnInit {
   }
 
   searchMore(query: string) {
+    this.isLoadingMore = true;
     this.ChordsService.searchMore(query, this.page).subscribe(data => {
       if(data.status === 404 || Object.keys(data).length === 0){
         document.getElementById('more-results').innerText = 'No more results!'
@@ -75,6 +77,7 @@ export class SearchHolderComponent implements OnInit {
       } else {
         this.searchResult = this.searchResult.concat(data);
       }
+      this.isLoadingMore = false;
     });
   }
 

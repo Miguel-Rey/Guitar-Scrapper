@@ -8,7 +8,7 @@ const ugs = require('ultimate-guitar-scraper');
 const axios = require('axios');
 
 function checkSrc(url){
-  let sanitisedUrl = `${process.env.FRONTURL}/${url.slice(6)}.gif`
+  let sanitisedUrl = encodeURI(`${process.env.FRONTURL}/${url.slice(6)}.gif`)
   console.log(sanitisedUrl)
   let response;
   return axios.get(sanitisedUrl)
@@ -42,9 +42,10 @@ router.post('/', (req, res, next) => {
   const page = parseInt(req.body.page);
   const recomended = req.body.recomended;
   const more = req.body.more;
+  console.log(decodeURI(query))
   if(recomended || more){
     ugs.search({
-      query: query,
+      query: decodeURI(query),
       page: page,
       type: ['Chords']
     }, (error, tabs) => {
@@ -56,7 +57,7 @@ router.post('/', (req, res, next) => {
     })
   } else {
     ugs.search({
-      query: query,
+      query: decodeURI(query),
       page: page,
       type: ['Chords']
     }, (error, tabs) => {

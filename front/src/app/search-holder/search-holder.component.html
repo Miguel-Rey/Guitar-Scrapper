@@ -16,3 +16,8 @@
   </div>
 </div>
 <button id="more-results" *ngIf='searchResult.length > 1' (click)="searchMore(prevQuery)">More results</button>
+<span *ngIf="isLoadingMore" class="more-spiner">
+  <div class="loader-wrap">
+    <div class="loader"></div>
+  </div>
+</span>

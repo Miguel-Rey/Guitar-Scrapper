@@ -8,7 +8,6 @@ import { map } from '../../node_modules/rxjs/operators';
 export class IsLoggedGuardService implements CanActivate {
   constructor(private SessionService: SessionService, private router: Router){}
   canActivate(): Observable<boolean>{
-    console.log('canActivate guard has been called');
     return this.SessionService.isLogged().pipe(
       map( res=> {
         if(res.status === 403){
